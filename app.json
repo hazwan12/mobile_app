@@ -20,6 +20,11 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      "expo-tracking-transparency",
+      "@react-native-firebase/app",
+      "@react-native-firebase/analytics"
+    ]
   }
 }
