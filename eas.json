@@ -1,0 +1,34 @@
+{
+  "cli": {
+    "version": ">= 16.0.0",
+    "promptToConfigurePushNotifications": false
+  },
+  "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal",
+      "ios": { "simulator": true },
+      "android": { "buildType": "apk" }
+    },
+    "preview": {
+      "distribution": "internal",
+      "android": { "buildType": "apk" }
+    },
+    "production": {
+      "android": { "buildType": "app-bundle" }
+    }
+  },
+  "submit": {
+    "production": {
+      "ios": {
+        "appleId": "__YOUR_APPLE_ID__",
+        "ascAppId": "__YOUR_APP_STORE_CONNECT_APP_ID__",
+        "appleTeamId": "__YOUR_APPLE_TEAM_ID__"
+      },
+      "android": {
+        "serviceAccountKeyPath": "./service-account.json",
+        "track": "production"
+      }
+    }
+  }
+}

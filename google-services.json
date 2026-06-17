@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "152446516585",
+    "project_id": "idletycoon-81120",
+    "storage_bucket": "idletycoon-81120.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:152446516585:android:e86c65d3b4283a77fc51f8",
+        "android_client_info": {
+          "package_name": "com.hazwan12.idletycoon"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBdv1VvtHDX6ttl8HLhXFIVCG4kcapEh-I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:152446516585:android:30401f3daa974a99fc51f8",
+        "android_client_info": {
+          "package_name": "com.yourcompany.idletycoon"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBdv1VvtHDX6ttl8HLhXFIVCG4kcapEh-I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
