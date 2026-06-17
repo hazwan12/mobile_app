@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { GeneratorDef } from '../game/types';
 import { getGeneratorCost } from '../game/generators';
 import { formatCash } from '../game/format';
+import { useShallow } from 'zustand/react/shallow';
 import { useGameStore } from '../game/store';
 
 interface Props {
@@ -12,10 +13,12 @@ interface Props {
 }
 
 export default function GeneratorRow({ def, count, qty }: Props) {
-  const { cash, buyGenerator } = useGameStore((s) => ({
-    cash: s.cash,
-    buyGenerator: s.buyGenerator,
-  }));
+  const { cash, buyGenerator } = useGameStore(
+    useShallow((s) => ({
+      cash: s.cash,
+      buyGenerator: s.buyGenerator,
+    })),
+  );
 
   const cost =
     qty === 1

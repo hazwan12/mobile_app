@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import { BannerAd, BannerAdSize } from 'react-native-google-mobile-ads';
 
+import { useShallow } from 'zustand/react/shallow';
 import { useGameStore, getCurrentRate } from '../game/store';
 import { GENERATOR_DEFS } from '../game/generators';
 import { formatCash, formatRate } from '../game/format';
@@ -31,14 +32,14 @@ export default function MainScreen({ offlinePending, onOfflineCollected }: Props
   const [prestigeOpen, setPrestigeOpen] = useState(false);
 
   const { cash, lifetimeCash, prestigeMultiplier, generators, activeBoost, tap } = useGameStore(
-    (s) => ({
+    useShallow((s) => ({
       cash: s.cash,
       lifetimeCash: s.lifetimeCash,
       prestigeMultiplier: s.prestigeMultiplier,
       generators: s.generators,
       activeBoost: s.activeBoost,
       tap: s.tap,
-    }),
+    })),
   );
 
   const rate = getCurrentRate({ cash, lifetimeCash, prestigeMultiplier, generators, activeBoost } as any);

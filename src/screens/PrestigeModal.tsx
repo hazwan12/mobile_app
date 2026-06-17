@@ -6,6 +6,7 @@ import {
   Modal,
   StyleSheet,
 } from 'react-native';
+import { useShallow } from 'zustand/react/shallow';
 import { useGameStore } from '../game/store';
 import { getPrestigePointsGained, calcPrestigeMultiplier } from '../game/generators';
 import { formatCash } from '../game/format';
@@ -17,11 +18,13 @@ interface Props {
 }
 
 export default function PrestigeModal({ visible, onClose }: Props) {
-  const { lifetimeCash, prestigePoints, prestige } = useGameStore((s) => ({
-    lifetimeCash: s.lifetimeCash,
-    prestigePoints: s.prestigePoints,
-    prestige: s.prestige,
-  }));
+  const { lifetimeCash, prestigePoints, prestige } = useGameStore(
+    useShallow((s) => ({
+      lifetimeCash: s.lifetimeCash,
+      prestigePoints: s.prestigePoints,
+      prestige: s.prestige,
+    })),
+  );
 
   const gained = getPrestigePointsGained(lifetimeCash);
   const newTotal = prestigePoints + gained;

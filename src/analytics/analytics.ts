@@ -1,11 +1,14 @@
-import analytics from '@react-native-firebase/analytics';
+import { getApp } from '@react-native-firebase/app';
+import { getAnalytics, logEvent, logAppOpen } from '@react-native-firebase/analytics';
+
+const analytics = () => getAnalytics(getApp());
 
 // Central event-tracking wrapper. All callers use this so we can swap
 // providers without touching game logic.
 
 export async function trackEvent(name: string, params?: Record<string, string | number | boolean>): Promise<void> {
   try {
-    await analytics().logEvent(name, params);
+    await logEvent(analytics(), name, params);
   } catch (_) {
     // Never let analytics failures surface to the user
   }
@@ -20,7 +23,7 @@ export function trackSessionStart(): void {
 }
 
 export function trackFirstOpen(): void {
-  analytics().logAppOpen().catch(() => {});
+  logAppOpen(analytics()).catch(() => {});
 }
 
 export function trackPrestige(pointsGained: number, newTotal: number): void {
@@ -33,12 +36,10 @@ export function trackGeneratorBuy(id: string, qty: number, cost: number): void {
 
 export function trackAdRevenue(adUnitId: string, revenue: number, format: string): void {
   // Also log Firebase's standard ad_impression event for LTV modelling
-  analytics()
-    .logEvent('ad_impression', {
-      ad_unit_name: adUnitId,
-      value: revenue,
-      currency: 'USD',
-      ad_format: format,
-    })
-    .catch(() => {});
+  logEvent(analytics(), 'ad_impression', {
+    ad_unit_name: adUnitId,
+    value: revenue,
+    currency: 'USD',
+    ad_format: format,
+  }).catch(() => {});
 }

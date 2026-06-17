@@ -3,6 +3,7 @@ import { AppState, AppStateStatus } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { requestTrackingPermissionsAsync } from 'expo-tracking-transparency';
 
+import { useShallow } from 'zustand/react/shallow';
 import { useGameStore } from './src/game/store';
 import { getCurrentRate } from './src/game/store';
 import { OFFLINE_EARNINGS_CAP_MS } from './src/game/generators';
@@ -14,15 +15,17 @@ const TICK_MS = 200;
 
 export default function App() {
   const { hydrate, tick, applyOfflineEarnings, lastTickAt, generators, prestigeMultiplier, activeBoost } =
-    useGameStore((s) => ({
-      hydrate: s.hydrate,
-      tick: s.tick,
-      applyOfflineEarnings: s.applyOfflineEarnings,
-      lastTickAt: s.lastTickAt,
-      generators: s.generators,
-      prestigeMultiplier: s.prestigeMultiplier,
-      activeBoost: s.activeBoost,
-    }));
+    useGameStore(
+      useShallow((s) => ({
+        hydrate: s.hydrate,
+        tick: s.tick,
+        applyOfflineEarnings: s.applyOfflineEarnings,
+        lastTickAt: s.lastTickAt,
+        generators: s.generators,
+        prestigeMultiplier: s.prestigeMultiplier,
+        activeBoost: s.activeBoost,
+      })),
+    );
 
   const [ready, setReady] = useState(false);
   const [offlinePending, setOfflinePending] = useState(0);
